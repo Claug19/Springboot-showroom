@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Digital Library --><library>
-<!--    todo-->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Showroom data--><Data>
     <user_list>
         <user_data>
             <id>user_1</id>
@@ -103,4 +102,5 @@
             <user_password>password</user_password>
             <user_email>gary@gmail.com</user_email>
         </user_data>
-</library>
+    </user_list>
+</Data>

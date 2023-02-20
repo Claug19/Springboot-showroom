@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Describes information in a car dealer showroom -->
+<Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="showroom.xsd">
+    <!-- clients -->
+    <Clients>
+        <Client id="1" familyId="022" gender="male">
+            <firstName>John</firstName>
+            <lastName>Johnson</lastName>
+            <preferredCar>Opel</preferredCar>
+            <preferredCar>Dacia</preferredCar>
+            <filter>SUV</filter>
+            <currency>euro</currency>
+        </Client>
+        <Client id="2" familyId="050" gender="male">
+            <firstName>Gordon</firstName>
+            <lastName>Ramsay</lastName>
+            <preferredCar>Mercedes</preferredCar>
+            <currency>euro</currency>
+        </Client>
+        <Client id="3" familyId="022" gender="female">
+            <firstName>Mary</firstName>
+            <lastName>Johnson</lastName>
+            <preferredCar>Audi</preferredCar>
+            <currency>euro</currency>
+        </Client>
+        <Client id="4" familyId="003" gender="male">
+            <firstName>Walter</firstName>
+            <lastName>White</lastName>
+            <preferredCar>Audi</preferredCar>
+            <preferredCar>Mercedes</preferredCar>
+            <currency>euro</currency>
+        </Client>
+        <Client id="5" familyId="025" gender="male">
+            <firstName>Gunar</firstName>
+            <lastName>Ferguson</lastName>
+            <preferredCar>Volvo</preferredCar>
+            <filter>SUV</filter>
+            <filter>10000</filter>
+            <filter>test</filter>
+            <currency>euro</currency>
+        </Client>
+        <Client id="6" familyId="030" gender="male">
+            <firstName>Wilhelm</firstName>
+            <lastName>Johnson</lastName>
+            <preferredCar>Seat</preferredCar>
+            <currency>euro</currency>
+        </Client>
+        <Client id="7" familyId="030" gender="female">
+            <firstName>Ann</firstName>
+            <lastName>Johnson</lastName>
+            <preferredCar>Seat</preferredCar>
+            <currency>euro</currency>
+        </Client>
+    </Clients>
+    <!-- Discounts the clients have -->
+    <Discounts>
+        <Discount idRef="1">
+            <expirationDate>2022-10-30</expirationDate>
+            <value>10</value>
+        </Discount>
+        <Discount idRef="3">
+            <expirationDate>2022-04-01</expirationDate>
+            <value>5</value>
+        </Discount>
+        <Discount idRef="5">
+            <expirationDate>2021-12-31</expirationDate>
+            <value>15</value>
+        </Discount>
+    </Discounts>
+    <!-- Cars available in the showroom -->
+    <AvailableCars>
+        <Car carId="300">
+            <carBrand>Volvo</carBrand>
+            <model>xc90</model>
+            <type>SUV</type>
+            <consumption>Benzine</consumption>
+            <year>2020</year>
+            <price currency="euro">11765</price>
+        </Car>
+        <Car carId="301">
+            <carBrand>Dacia</carBrand>
+            <model>Logan</model>
+            <type>sedan</type>
+            <consumption>Benzine</consumption>
+            <year>2018</year>
+            <price currency="euro">10000</price>
+        </Car>
+        <Car carId="302">
+            <carBrand>Dacia</carBrand>
+            <model>Logan</model>
+            <type>sedan</type>
+            <consumption>Diesel</consumption>
+            <year>2018</year>
+            <price currency="dollar">8000</price>
+        </Car>
+    </AvailableCars>
+
+    <!-- Reserved cars-->
+    <ReservedCars>
+        <ReservedCar>
+            <clientId>1</clientId>
+            <carId>302</carId>
+        </ReservedCar>
+    </ReservedCars>
+</Data>

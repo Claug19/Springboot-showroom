@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Data">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Clients">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Client" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="firstName"/>
+                    <xs:element type="xs:string" name="lastName"/>
+                    <xs:element type="xs:string" name="preferredCar" maxOccurs="unbounded" minOccurs="0"/>
+                    <xs:element type="xs:string" name="filter" maxOccurs="unbounded" minOccurs="0"/>
+                    <xs:element type="xs:string" name="currency"/>
+                  </xs:sequence>
+                  <xs:attribute type="xs:byte" name="id" use="optional"/>
+                  <xs:attribute type="xs:byte" name="familyId" use="optional"/>
+                  <xs:attribute type="xs:string" name="gender" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Discounts">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Discount" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:date" name="expirationDate"/>
+                    <xs:element type="xs:byte" name="value"/>
+                  </xs:sequence>
+                  <xs:attribute type="xs:byte" name="idRef" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AvailableCars">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Car" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="carBrand"/>
+                    <xs:element type="xs:string" name="model"/>
+                    <xs:element type="xs:string" name="type"/>
+                    <xs:element type="xs:string" name="consumption"/>
+                    <xs:element type="xs:short" name="year"/>
+                    <xs:element name="price">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:int">
+                            <xs:attribute type="xs:string" name="currency" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:short" name="carId" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ReservedCars">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReservedCar" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:int" name="clientId"/>
+                    <xs:element type="xs:int" name="carId"/>
+                    </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

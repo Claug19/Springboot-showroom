@@ -1,1 +1,189 @@
-<!--todo-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Spring Boot ajax example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <style>
+        .navbar-header{
+            color: white;
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header" >
+           Showroom
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="min-height: 500px">
+
+    <div class="starter-template">
+        <h1>Showroom site</h1>
+
+        <div id="feedback"></div>
+
+        <form class="form-horizontal" id="search-form">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">Username:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="username"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="bth-search"
+                            class="btn btn-primary btn-lg">Search
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <form class="form-horizontal" id="search-form-cars">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">Car Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="carBrand"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="btn-search-car"
+                            class="btn btn-primary btn-lg">Search
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <form class="form-horizontal" id="search-form-cars-that-start-with">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">Car name starts with:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="carBrandThatStartWith"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="bth-search-car-that-start-with"
+                            class="btn btn-primary btn-lg">Search
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <form class="form-horizontal" id="search-form-model">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">Car models:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="carModel" placeholder="Request body not required"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="bth-search-model"
+                            class="btn btn-primary btn-lg">Search
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <form class="form-horizontal" id="search-form-model-filtered-by-year">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">Car model by year:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="carModelFilteredByYear" placeholder="Request body : year of model value"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="bth-search-model-filtered-by-year"
+                            class="btn btn-primary btn-lg">Search
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <form class="form-horizontal" id="search-form-model-filtered-by-price">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">Car model by price:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="carModelFilteredByPrice" placeholder="Request body : price of model" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="bth-search-model-filtered-by-price"
+                            class="btn btn-primary btn-lg">Search
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <form class="form-horizontal" id="create-form-reserved-car">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">Created reserved cars:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="reservedCar" placeholder="Request body : json: {clientId: 1,carId: 2}" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="bth-create-reserved-car"
+                            class="btn btn-primary btn-lg">Search
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <form class="form-horizontal" id="delete-form-reserved-car">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">Deleted reserved car:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="deletedReservedCar" placeholder="Request body : json: {clientId: 1,carId: 2}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="bth-delete-reserved-car"
+                            class="btn btn-primary btn-lg">Search
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+<div class="container">
+    <footer>
+        <p>
+            Showroom
+        </p>
+    </footer>
+</div>
+
+<script type="text/javascript"
+        src="webjars/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript" src="javascript/main.js"></script>
+
+</body>
+</html>
