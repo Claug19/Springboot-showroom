@@ -10,7 +10,7 @@ public class SpringbootShowroomApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootShowroomApplication.class, args);
-		ApplicationContext configuration = new ClassPathXmlApplicationContext("Config.xml");
+		ApplicationContext configuration = new ClassPathXmlApplicationContext("config.xml");
 		ApplicationManager applicationManager = (ApplicationManager) configuration.getBean("ApplicationManagerBean");
 		applicationManager.start();
 	}

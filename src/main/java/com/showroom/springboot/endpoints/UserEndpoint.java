@@ -11,7 +11,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
 public class UserEndpoint {
-    private static final String NAMESPACE_URI = "http://part2.com/models/soap/user";
+    private static final String NAMESPACE_URI = "http://showroomSoap.com/models/soap/user";
 
     private UserRepository userRepository;
 

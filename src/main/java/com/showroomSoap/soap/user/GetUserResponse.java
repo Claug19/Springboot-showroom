@@ -8,7 +8,7 @@
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="user" type="{http://part2.com/models/soap/user}user"/>
+ *         &lt;element name="user" type="{http://showroomSoap.com/models/soap/user}user"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
