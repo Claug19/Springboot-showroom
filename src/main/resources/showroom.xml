@@ -77,6 +77,10 @@
             <consumption>Benzine</consumption>
             <year>2020</year>
             <price currency="euro">11765</price>
+            <features>
+                <feature>Airbag</feature>
+                <feature>Heated seat</feature>
+            </features>
         </Car>
         <Car carId="301">
             <carBrand>Dacia</carBrand>
@@ -85,6 +89,10 @@
             <consumption>Benzine</consumption>
             <year>2018</year>
             <price currency="euro">10000</price>
+            <features>
+                <feature>Airbag</feature>
+                <feature>Heated seat</feature>
+            </features>
         </Car>
         <Car carId="302">
             <carBrand>Dacia</carBrand>
@@ -93,6 +101,10 @@
             <consumption>Diesel</consumption>
             <year>2018</year>
             <price currency="dollar">8000</price>
+            <features>
+                <feature>Airbag</feature>
+                <feature>Heated seat</feature>
+            </features>
         </Car>
     </AvailableCars>
 

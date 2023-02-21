@@ -29,7 +29,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("EmployeePort");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://showroom-soap.com/models/soap/emp");
+        wsdl11Definition.setTargetNamespace("http://showroomSoap.com/models/soap/emp");
         wsdl11Definition.setSchema(empSchema);
         return wsdl11Definition;
     }
@@ -44,7 +44,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("EmployeePort");
         wsdl11Definition.setLocationUri("/ws/user");
-        wsdl11Definition.setTargetNamespace("http://showroom-soap.com/models/soap/user");
+        wsdl11Definition.setTargetNamespace("http://showroomSoap.com/models/soap/user");
         wsdl11Definition.setSchema(empSchemaUser);
         return wsdl11Definition;
     }

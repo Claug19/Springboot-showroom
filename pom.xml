@@ -28,11 +28,6 @@
 			<scope>test</scope>
 		</dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel</artifactId>
-            <version>3.20.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.plc4x</groupId>
             <artifactId>apache-camel</artifactId>
             <version>0.3.1</version>
@@ -66,6 +61,31 @@
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 			<version>2.2.7</version>
+		</dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>jsr250-api</artifactId>
+			<version>8.5.11</version>
+		</dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>jsr250-api</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 
