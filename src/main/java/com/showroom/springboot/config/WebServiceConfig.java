@@ -29,7 +29,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("EmployeePort");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://showroomSoap.com/soap/emp");
+        wsdl11Definition.setTargetNamespace("http://showroomSoap.com/soap/employee");
         wsdl11Definition.setSchema(empSchema);
         return wsdl11Definition;
     }
@@ -42,7 +42,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     @Bean(name = "user")
     public DefaultWsdl11Definition webservice2Wsdl11Definition(XsdSchema empSchemaUser) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("EmployeePort");
+        wsdl11Definition.setPortTypeName("UserPort");
         wsdl11Definition.setLocationUri("/ws/user");
         wsdl11Definition.setTargetNamespace("http://showroomSoap.com/soap/user");
         wsdl11Definition.setSchema(empSchemaUser);

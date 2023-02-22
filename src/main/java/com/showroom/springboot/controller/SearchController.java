@@ -3,6 +3,7 @@ package com.showroom.springboot.controller;
 import com.showroom.springboot.model.*;
 import com.showroom.springboot.services.CarService;
 import com.showroom.springboot.services.ClientService;
+import com.showroom.springboot.services.DiscountService;
 import com.showroom.springboot.services.UserService;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,6 +24,7 @@ public class SearchController {
 
     CarService carService;
     ClientService clientService;
+    DiscountService discountService;
     UserService userService;
 
     @Autowired
@@ -33,6 +35,11 @@ public class SearchController {
     @Autowired
     public void setClientService(ClientService clientService) {
         this.clientService = clientService;
+    }
+
+    @Autowired
+    public void setDiscountService(DiscountService discountService) {
+        this.discountService = discountService;
     }
 
     @Autowired
