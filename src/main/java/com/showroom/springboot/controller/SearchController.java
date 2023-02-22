@@ -1,5 +1,10 @@
 package com.showroom.springboot.controller;
 
+import com.showroom.springboot.model.*;
+import com.showroom.springboot.services.CarService;
+import com.showroom.springboot.services.ClientService;
+import com.showroom.springboot.services.UserService;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,28 +18,28 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.showroom.springboot.model.*;
-import com.showroom.springboot.services.UserService;
-
 @RestController
 public class SearchController {
 
+    CarService carService;
+    ClientService clientService;
     UserService userService;
-    BookService bookService;
-    AuthorService authorService;
+
+    @Autowired
+    public void setCarService(CarService carService) {
+        this.carService = carService;
+    }
+
+    @Autowired
+    public void setClientService(ClientService clientService) {
+        this.clientService = clientService;
+    }
 
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
-    @Autowired
-    public void setBookService(BookService bookService) {
-        this.bookService = bookService;
-    }
-
-    @Autowired
-    public void setAuthorService(AuthorService authorService){this.authorService = authorService;}
 
     // *********** user requests ***********
     @PostMapping("/api/search")
@@ -63,11 +68,11 @@ public class SearchController {
     }
 
 
-    // *********** book requests ***********
-    @PostMapping("/api/search-book")
+    // *********** car requests ***********
+    @PostMapping("/api/search-car")
     public ResponseEntity<?> getSearchResultViaAjax1Response(@Valid @RequestBody SearchCriteria search, Errors errors) {
 
-        AjaxResponseBody<Book> result = new AjaxResponseBody();
+        AjaxResponseBody<Car> result = new AjaxResponseBody();
 
         //If error, just return a 400 bad request, along with the error message
         if (errors.hasErrors()) {
@@ -77,13 +82,13 @@ public class SearchController {
 
         }
 
-        List<Book> books = bookService.findBookByName(search.getBookTitle());
-        if (books.isEmpty()) {
-            result.setMsg("no book found!");
+        List<Car> cars = carService.findCarByName(search.getBookTitle());
+        if (cars.isEmpty()) {
+            result.setMsg("no cars found!");
         } else {
             result.setMsg("success");
         }
-        result.setResult(books);
+        result.setResult(cars);
 
         return ResponseEntity.ok(result);
 
