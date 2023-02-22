@@ -1,10 +1,9 @@
 package com.showroom.springboot;
 
-import org.apache.camel.Endpoint;
 import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 
-import org.apache.camel.Processor;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -30,59 +29,54 @@ public class REST extends RouteBuilder {
     public void configure() throws Exception {
         restConfiguration().component("restlet").host("localhost").port(1234).enableCORS(true);
 
-        // 1th .request
-        // http://localhost:1234/api/camel/booksName/Jeff%20Keller
-        rest("/api/camel").get("/booksName/{name}")
+        // 1. http://localhost:1234/api/camel/carBrand/Dacia
+        rest("/api/camel").get("/carBrand/{brand}")
                 .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
-                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\NewStylesheet.xsl");
+                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet1.xsl");
 
-        // 2nd.request
-        //http://localhost:1234/api/camel/booksCopyright/2010
-        rest("/api/camel").get("/booksCopyright/{year}")
+        //2. http://localhost:1234/api/camel/carBrandStartsWith/2010
+        rest("/api/camel").get("/carBrandStartsWith/{year}")
                 .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
-                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\NewStylesheet1.xsl");
+                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet2.xsl");
 
-        // 3th.request
-        // http://localhost:1234/api/camel/booksStartWithA
+        // 3. http://localhost:1234/api/camel/booksStartWithA
         rest("/api/camel").get("/booksStartWithA")
                 .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
-                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\NewStylesheet2.xsl");
+                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet3.xsl");
 
-        // 4th.request
-        // http://localhost:1234/api/camel/booksContainsWord/Arta
+        // 4. http://localhost:1234/api/camel/booksContainsWord/Arta
         rest("/api/camel").get("/booksContainsWord/{word}")
                 .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
-                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\NewStylesheet3.xsl");
+                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet4.xsl");
 
-        // 5.request
-        // http://localhost:1234/api/camel/chapterNumber
+        // 5. http://localhost:1234/api/camel/chapterNumber
         rest("/api/camel").get("/chapterNumber")
                 .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
-                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\NewStylesheet4.xsl");
+                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet5.xsl");
 
-        // 6 request.
-        // http://localhost:1234/api/camel/authorName/Jeff%20Keller
+        // 6. http://localhost:1234/api/camel/authorName/Jeff%20Keller
         rest("/api/camel").get("/authorName/{name}")
                 .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
-                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\NewStylesheet5.xsl");
+                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet6.xsl");
+
 
         rest("/api/camel").get("/books/{bookId}")
                 .produces(TEXT_XML)
                 .route()
                 .process(PROCESSOR)
-                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\booksById.xsl");
+                .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet7.xsl");
 
 //        rest("/books").get("/{bookId}")
 //                .produces("text/xml")

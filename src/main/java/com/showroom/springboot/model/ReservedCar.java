@@ -19,4 +19,12 @@ public class ReservedCar {
     public void setCarId(int carId) {
         this.carId = carId;
     }
+
+    @Override
+    public String toString() {
+        return "ReservedCar{" +
+                "clientId='" + clientId + '\'' +
+                ", carId='" + carId + '\'' +
+                '}';
+    }
 }

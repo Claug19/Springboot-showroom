@@ -6,77 +6,85 @@ public class SearchCriteria {
     //users
     String username;
 
-    //books
-    String bookTitle;
-    String bookTitlesThatStartWith;
+    // cars
+    String carBrand;
+    String carBrandStartWith;
+    String model;
+    int year;
+    int price;
 
-    //authors
-    String authors;
-    String authorsFilteredByCopyrightYear;
-    String authorsFilteredByPublisherAndName;
+    String reservedCar;
+    String deletedReservedCar;
 
-    String bookedBook;
-    String deletedBookedBook;
+    // clients
+
+    // discounts
+
 
     public String getUsername() {
         return username;
-    }
-
-    public String getBookTitle() {
-        return bookTitle;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public void setBookTitle(String bookTitle){ this.bookTitle = bookTitle;}
-
-    public String getBookTitlesThatStartWith() {
-        return bookTitlesThatStartWith;
+    public String getCarBrand() {
+        return carBrand;
     }
 
-    public void setBookTitlesThatStartWith(String bookTitlesThatStartWith) {
-        this.bookTitlesThatStartWith = bookTitlesThatStartWith;
+    public void setCarBrand(String carBrand){
+        this.carBrand = carBrand;
     }
 
-    public String getAuthors() {
-        return authors;
+    public String getCarBrandStartWith() {
+        return carBrandStartWith;
     }
 
-    public void setAuthors(String authors) {
-        this.authors = authors;
+    public void setCarBrandStartWith(String carBrandStartWith) {
+        this.carBrandStartWith = carBrandStartWith;
     }
 
-    public String getAuthorsFilteredByCopyrightYear() {
-        return authorsFilteredByCopyrightYear;
+    public String getModel(){
+        return model;
     }
 
-    public void setAuthorsFilteredByCopyrightYear(String authorsFilteredByCopyrightYear) {
-        this.authorsFilteredByCopyrightYear = authorsFilteredByCopyrightYear;
+    public void setModel(String model)
+    {
+        this.model = model;
     }
 
-    public String getAuthorsFilteredByPublisherAndName() {
-        return authorsFilteredByPublisherAndName;
+    public int getYear(){
+        return year;
     }
 
-    public void setAuthorsFilteredByPublisherAndName(String authorsFilteredByPublisherAndName) {
-        this.authorsFilteredByPublisherAndName = authorsFilteredByPublisherAndName;
+    public void setYear(int year)
+    {
+        this.year = year;
     }
 
-    public String getBookedBook() {
-        return bookedBook;
+    public int getPrice(){
+        return price;
     }
 
-    public void setBookedBook(String bookedBook) {
-        this.bookedBook = bookedBook;
+    public void setModel(int price)
+    {
+        this.price = price;
     }
 
-    public String getDeletedBookedBook() {
-        return deletedBookedBook;
+    public String getReservedCar() {
+        return reservedCar;
     }
 
-    public void setDeletedBookedBook(String deletedBookedBook) {
-        this.deletedBookedBook = deletedBookedBook;
+    public void setReservedCar(String reservedCar) {
+        this.reservedCar = reservedCar;
+    }
+
+    public String getDeletedReservedCar() {
+        return deletedReservedCar;
+    }
+
+    public void setDeletedReservedCar(String setDeletedReservedCar) {
+        this.deletedReservedCar = deletedReservedCar;
     }
 }

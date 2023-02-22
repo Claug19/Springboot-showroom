@@ -25,7 +25,7 @@ public class ClientService {
 
     private List <Client> clients;
 
-    public List<Client> getClientList() {
+    public static List<Client> getClientList() {
         return getAllClients();
     }
 

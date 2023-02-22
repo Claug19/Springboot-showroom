@@ -12,7 +12,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -30,14 +29,13 @@ public class DataUtils {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(Utils.RESOURCES_FOLDER + "\\user.xml");
             NodeList books = doc.getElementsByTagName("user_data");
-            String infoMessage;
             for (int i = 0; i < books.getLength(); i++) {
                 Node node = books.item(i);
                 Element book = (Element) node;
                 String id = book.getAttribute("id");
-                String name = book.getElementsByTagName("user_name").item(0).getFirstChild().getNodeValue().toString();
-                String pass = book.getElementsByTagName("user_password").item(0).getFirstChild().getNodeValue().toString();
-                String email = book.getElementsByTagName("user_email").item(0).getFirstChild().getNodeValue().toString();
+                String name = book.getElementsByTagName("user_name").item(0).getFirstChild().getNodeValue();
+                String pass = book.getElementsByTagName("user_password").item(0).getFirstChild().getNodeValue();
+                String email = book.getElementsByTagName("user_email").item(0).getFirstChild().getNodeValue();
 
                 User user = new User();
                 user.setUsername(name);
@@ -48,14 +46,7 @@ public class DataUtils {
                 users.add(user);
                 System.out.println();
             }
-        } catch (ParserConfigurationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SAXException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
         return users;
@@ -100,18 +91,7 @@ public class DataUtils {
             transformer.transform(source, result);
 
 
-        } catch (ParserConfigurationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SAXException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
+        } catch (SAXException | IOException | ParserConfigurationException | TransformerException e) {
             e.printStackTrace();
         }
     }

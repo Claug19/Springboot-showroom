@@ -1,22 +1,22 @@
 package com.showroom.springboot.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.showroom.springboot.model.*;
 import com.showroom.springboot.services.CarService;
 import com.showroom.springboot.services.ClientService;
 import com.showroom.springboot.services.DiscountService;
 import com.showroom.springboot.services.UserService;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -89,23 +89,22 @@ public class SearchController {
 
         }
 
-        List<Car> cars = carService.findCarByName(search.getBookTitle());
+        List<Car> cars = carService.findCarsByBrand(search.getCarBrand());
         if (cars.isEmpty()) {
-            result.setMsg("no cars found!");
+            result.setMsg("No cars found!");
         } else {
-            result.setMsg("success");
+            result.setMsg("Success");
         }
         result.setResult(cars);
 
         return ResponseEntity.ok(result);
-
     }
 
 
-    @PostMapping("/api/search-book-titles-that-start-with")
+    @PostMapping("/api/search-car-that-start-with")
     public ResponseEntity<?> getSearchResultViaAjax2Response(@Valid @RequestBody SearchCriteria search, Errors errors) {
 
-        AjaxResponseBody<BookChaptersModel> result = new AjaxResponseBody();
+        AjaxResponseBody<CarCompact> result = new AjaxResponseBody();
 
         //If error, just return a 400 bad request, along with the error message
         if (errors.hasErrors()) {
@@ -114,49 +113,20 @@ public class SearchController {
             return ResponseEntity.badRequest().body(result);
         }
 
-        List<BookChaptersModel> books = bookService.getBookThatStartWith(search.getBookTitlesThatStartWith());
-        if (books.isEmpty()) {
-            result.setMsg("no book found!");
-        } else {
-            result.setMsg("success");
-        }
-        result.setResult(books);
+        List<CarCompact> cars = carService.findCarsThatStartWith(search.getCarBrandStartWith());
+        if (cars.isEmpty()) {
+            result.setMsg("No cars found!");
+        } else
+            result.setMsg("Success");
+        result.setResult(cars);
 
         return ResponseEntity.ok(result);
-
     }
 
-
-    // *********** author requests ***********
-    @PostMapping("/api/search-authors")
-    public ResponseEntity<?> getSearchResultViaAjax5Response(@Valid @RequestBody SearchCriteria search, Errors errors)  {
-
-        AjaxResponseBody<Author> result = new AjaxResponseBody();
-
-        //If error, just return a 400 bad request, along with the error message
-        if (errors.hasErrors()) {
-
-            result.setMsg(errors.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.joining(",")));
-            return ResponseEntity.badRequest().body(result);
-        }
-
-        Set<Author> authors = authorService.getAllAuthors();
-        if (authors.isEmpty()) {
-            result.setMsg("no book found!");
-        } else {
-            result.setMsg("success");
-        }
-        result.setResult(authors.stream().collect(Collectors.toList()));
-
-        return ResponseEntity.ok(result);
-
-    }
-
-    //e.g year: 2010
-    @PostMapping("/api/search-authors-filtered-by-copyrightYear")
+    @PostMapping("/api/search-car-model")
     public ResponseEntity<?> getSearchResultViaAjax3Response(@Valid @RequestBody SearchCriteria search, Errors errors) {
 
-        AjaxResponseBody<BookAuthorsFilteredByCopyRightYear> result = new AjaxResponseBody();
+        AjaxResponseBody<Car> result = new AjaxResponseBody();
 
         //If error, just return a 400 bad request, along with the error message
         if (errors.hasErrors()) {
@@ -165,23 +135,20 @@ public class SearchController {
             return ResponseEntity.badRequest().body(result);
         }
 
-        Set<BookAuthorsFilteredByCopyRightYear> books = authorService.getBookAuthorsFilteredByCopyRightYear(Integer.parseInt(search.getAuthorsFilteredByCopyrightYear()));
-        if (books.isEmpty()) {
-            result.setMsg("no book found!");
-        } else {
-            result.setMsg("success");
-        }
-        result.setResult(books.stream().collect(Collectors.toList()));
+        List<Car> cars = carService.findCarsByModel(search.getModel());
+        if (cars.isEmpty()) {
+            result.setMsg("No cars found!");
+        } else
+            result.setMsg("Success");
+        result.setResult(cars);
 
         return ResponseEntity.ok(result);
-
     }
 
-    //e.g {"publisher": "Wiley-IEEE Press","authorName": "Richard"}
-    @PostMapping("/api/search-authors-filtered-by-publisher-and-name")
-    public ResponseEntity<?> getSearchResultViaAjax4Response(@Valid @RequestBody SearchCriteria search, Errors errors)  {
+    @PostMapping("/api/search-car-model-year")
+    public ResponseEntity<?> getSearchResultViaAjax4Response(@Valid @RequestBody SearchCriteria search, Errors errors) {
 
-        AjaxResponseBody<BookAuthorsFilteredByPublisher> result = new AjaxResponseBody();
+        AjaxResponseBody<CarCompact> result = new AjaxResponseBody();
 
         //If error, just return a 400 bad request, along with the error message
         if (errors.hasErrors()) {
@@ -190,32 +157,44 @@ public class SearchController {
             return ResponseEntity.badRequest().body(result);
         }
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        Request1Ajax r1Ajax = null;
-        try {
-            r1Ajax = objectMapper.readValue(search.getAuthorsFilteredByPublisherAndName(), Request1Ajax.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Set<BookAuthorsFilteredByPublisher> authors = authorService.getBookAuthorsFilteredByPublisherAndAuthorName(r1Ajax.getPublisher(), r1Ajax.getAuthorName());
-        if (authors.isEmpty()) {
-            result.setMsg("no book found!");
-        } else {
-            result.setMsg("success");
-        }
-        result.setResult(authors.stream().collect(Collectors.toList()));
+        List<CarCompact> cars = carService.findCarsByModelAndYear(search.getModel(), search.getYear());
+        if (cars.isEmpty()) {
+            result.setMsg("No cars found!");
+        } else
+            result.setMsg("Success");
+        result.setResult(cars);
 
         return ResponseEntity.ok(result);
-
     }
 
-    //e.g {"title": "Cele cinci limbaje ale iubirii","userId": "user_3"}
-    // *********** booked book requests ***********
-    @PostMapping("/api/add-booked-book")
+    @PostMapping("/api/search-car-model-price")
+    public ResponseEntity<?> getSearchResultViaAjax5Response(@Valid @RequestBody SearchCriteria search, Errors errors) {
+
+        AjaxResponseBody<CarCompact> result = new AjaxResponseBody();
+
+        //If error, just return a 400 bad request, along with the error message
+        if (errors.hasErrors()) {
+
+            result.setMsg(errors.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.joining(",")));
+            return ResponseEntity.badRequest().body(result);
+        }
+
+        List<CarCompact> cars = carService.findCarsByModelAndPrice(search.getModel(), search.getPrice());
+        if (cars.isEmpty()) {
+            result.setMsg("No cars found!");
+        } else
+            result.setMsg("Success");
+        result.setResult(cars);
+
+        return ResponseEntity.ok(result);
+    }
+
+    //e.g {"clientId": "1","carId": "2"}
+    // *********** reserved car requests ***********
+    @PostMapping("/api/add-reserved-car")
     public ResponseEntity<?> getSearchResultViaAjax6Response(@Valid @RequestBody SearchCriteria search, Errors errors)  {
 
-        AjaxResponseBody<BookedBook> result = new AjaxResponseBody();
+        AjaxResponseBody<ReservedCar> result = new AjaxResponseBody();
 
         //If error, just return a 400 bad request, along with the error message
         if (errors.hasErrors()) {
@@ -225,35 +204,33 @@ public class SearchController {
         }
 
         ObjectMapper objectMapper = new ObjectMapper();
-        BookedBook bookedBook = null;
+        ReservedCar reservedCar = null;
         try {
-            bookedBook = objectMapper.readValue(search.getBookedBook(), BookedBook.class);
+            reservedCar = objectMapper.readValue(search.getReservedCar(), ReservedCar.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        bookService.addBookedBook(bookedBook);
+        carService.addReservedCar(reservedCar);
 
-        List<BookedBook> bookedBooks = new ArrayList<>();
-        bookedBooks.add(bookedBook);
+        List<ReservedCar> reservedCars = new ArrayList<>();
+        reservedCars.add(reservedCar);
 
-        if (bookedBooks.isEmpty()) {
-            result.setMsg("no book found!");
+        if (reservedCars.isEmpty()) {
+            result.setMsg("No reserved cars found!");
         } else {
-            result.setMsg("success");
+            result.setMsg("Success");
         }
-        result.setResult(bookedBooks.stream().collect(Collectors.toList()));
+        result.setResult(reservedCars.stream().collect(Collectors.toList()));
 
         return ResponseEntity.ok(result);
 
     }
 
-
-    // *********** booked book requests ***********
-    @PostMapping("/api/delete-booked-book")
+    @PostMapping("/api/delete-reserved-car")
     public ResponseEntity<?> getSearchResultViaAjax7Response(@Valid @RequestBody SearchCriteria search, Errors errors)  {
 
-        AjaxResponseBody<BookedBook> result = new AjaxResponseBody();
+        AjaxResponseBody<ReservedCar> result = new AjaxResponseBody();
 
         //If error, just return a 400 bad request, along with the error message
         if (errors.hasErrors()) {
@@ -263,30 +240,80 @@ public class SearchController {
         }
 
         ObjectMapper objectMapper = new ObjectMapper();
-        BookedBook bookedBook = null;
+        ReservedCar reservedCar = null;
         try {
-            bookedBook = objectMapper.readValue(search.getDeletedBookedBook(), BookedBook.class);
+            reservedCar = objectMapper.readValue(search.getDeletedReservedCar(), ReservedCar.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        bookService.deleteBookedBook(bookedBook);
+        carService.deleteReservedCar(reservedCar);
 
-        List<BookedBook> bookedBooks = new ArrayList<>();
+        List<ReservedCar> reservedCars = new ArrayList<>();
 
-        if (bookedBooks.isEmpty()) {
-            result.setMsg("success!");
+        if (reservedCars.isEmpty()) {
+            result.setMsg("Success!");
         } else {
-            result.setMsg("The book was not deleted");
+            result.setMsg("The reserved car was not deleted");
         }
 
-        bookedBooks.remove(bookedBook);
+        reservedCars.remove(reservedCars);
 
 
-        result.setResult(bookedBooks.stream().collect(Collectors.toList()));
+        result.setResult(reservedCars.stream().collect(Collectors.toList()));
 
         return ResponseEntity.ok(result);
 
+    }
+
+    // *********** client requests ***********
+    @PostMapping("/api/search-client")
+    public ResponseEntity<?> getSearchResultViaAjax8Response(@Valid @RequestBody SearchCriteria search, Errors errors) {
+
+        AjaxResponseBody<Client> result = new AjaxResponseBody();
+
+        //If error, just return a 400 bad request, along with the error message
+        if (errors.hasErrors()) {
+
+            result.setMsg(errors.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.joining(",")));
+            return ResponseEntity.badRequest().body(result);
+
+        }
+
+        List<Client> clients = clientService.getClientList();
+        if (clients.isEmpty()) {
+            result.setMsg("No clients found!");
+        } else {
+            result.setMsg("Success");
+        }
+        result.setResult(clients);
+
+        return ResponseEntity.ok(result);
+    }
+
+    // *********** discount requests ***********
+    @PostMapping("/api/search-discount")
+    public ResponseEntity<?> getSearchResultViaAjax9Response(@Valid @RequestBody SearchCriteria search, Errors errors) {
+
+        AjaxResponseBody<Discount> result = new AjaxResponseBody();
+
+        //If error, just return a 400 bad request, along with the error message
+        if (errors.hasErrors()) {
+
+            result.setMsg(errors.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.joining(",")));
+            return ResponseEntity.badRequest().body(result);
+
+        }
+
+        List<Discount> discounts = discountService.getAllDiscounts();
+        if (discounts.isEmpty()) {
+            result.setMsg("No discounts found!");
+        } else {
+            result.setMsg("Success");
+        }
+        result.setResult(discounts);
+
+        return ResponseEntity.ok(result);
     }
 
 }
