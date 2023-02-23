@@ -1,8 +1,7 @@
 package com.showroom.springboot.services;
 
 import com.showroom.springboot.Utils;
-import com.showroom.springboot.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.showroom.springboot.model.Client;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -10,6 +9,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.annotation.PostConstruct;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,12 +20,15 @@ import java.util.List;
 @Service
 public class ClientService {
 
-    @Autowired
-    ClientService clientService;
-
     private List <Client> clients;
 
-    public static List<Client> getClientList() {
+    @PostConstruct
+    private void iniDataForTesting() {
+        clients = new ArrayList<Client>();
+        getAllClients();
+    }
+
+    public List<Client> getClientList() {
         return getAllClients();
     }
 
@@ -81,7 +84,7 @@ public class ClientService {
         return clients;
     }
 
-    public void setFilters(Element info, List<String> filters)
+    public static void setFilters(Element info, List<String> filters)
     {
         NodeList filtersList = info.getChildNodes();
         for (int k = 0; k < filtersList.getLength(); k++) {

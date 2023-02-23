@@ -1,18 +1,24 @@
 package com.showroom.springboot.services;
 
 import com.showroom.springboot.Utils;
-import com.showroom.springboot.model.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.showroom.springboot.model.Car;
+import com.showroom.springboot.model.CarCompact;
+import com.showroom.springboot.model.ReservedCar;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.annotation.PostConstruct;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.IOException;
@@ -23,10 +29,13 @@ import java.util.stream.Collectors;
 @Service
 public class CarService {
 
-    @Autowired
-    ClientService clientService;
-
     private List<Car> cars;
+
+    @PostConstruct
+    private void iniDataForTesting() {
+        cars = new ArrayList<Car>();
+        getAllCars();
+    }
 
     public List<Car> getCarList() {
         return getAllCars();
@@ -71,12 +80,6 @@ public class CarService {
                 .filter(x -> x.getPrice() <= price)
                 .collect(Collectors.toList());
         return result;
-    }
-
-    @PostConstruct
-    private void iniDataForTesting() {
-        cars = new ArrayList<Car>();
-        getAllCars();
     }
 
     // getFunctions
@@ -243,7 +246,7 @@ public class CarService {
             model.appendChild(doc.createTextNode(String.valueOf(car.getCarId())));
             newUser.appendChild(model);
 
-            rootElement.item(0).appendChild(newUser);
+            rootElement.item(rootElement.getLength()-1).appendChild(newUser);
 
             DOMSource source = new DOMSource(doc);
 
@@ -320,6 +323,7 @@ public class CarService {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(Utils.SHOWROOM_XML_PATH);
             NodeList cars = doc.getElementsByTagName("Car");
+            NodeList rootElement = doc.getElementsByTagName("AvailableCars");
 
             Element lastElement = (Element) cars.item(cars.getLength()-1);  // get the last car
             int lastId = Integer.parseInt(lastElement.getAttribute("carId").replaceAll("[^0-9]", ""));  // obtain id
@@ -353,7 +357,7 @@ public class CarService {
             price.setAttribute("currency", car.getCurrency());
             newCar.appendChild(price);
 
-            cars.item(0).appendChild(newCar);
+            rootElement.item(rootElement.getLength()-1).appendChild(newCar);
 
             DOMSource source = new DOMSource(doc);
 

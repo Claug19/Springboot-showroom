@@ -1,14 +1,15 @@
 package com.showroom.springboot.endpoints;
 
+import com.showroomSoap.soap.employee.GetEmployeeRequest;
+import com.showroomSoap.soap.employee.GetEmployeeResponse;
+import com.showroom.springboot.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import com.showroomSoap.soap.employee.GetEmployeeRequest;
-import com.showroomSoap.soap.employee.GetEmployeeResponse;
-import com.showroom.springboot.repository.EmployeeRepository;
+
 
 @Endpoint
 public class EmployeeEndpoint {

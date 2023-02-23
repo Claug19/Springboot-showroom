@@ -29,60 +29,54 @@ public class REST extends RouteBuilder {
     public void configure() throws Exception {
         restConfiguration().component("restlet").host("localhost").port(1234).enableCORS(true);
 
-        // 1. http://localhost:1234/api/camel/carBrand/Dacia
-        rest("/api/camel").get("/carBrand/{brand}")
+        // 1. http://localhost:1234/api/camel/cars
+        rest("/api/camel").get("/cars")
                 .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
                 .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet1.xsl");
 
-        //2. http://localhost:1234/api/camel/carBrandStartsWith/2010
-        rest("/api/camel").get("/carBrandStartsWith/{year}")
+        //2. http://localhost:1234/api/camel/cars/{CarBrand}
+        rest("/api/camel").get("/cars/{CarBrand}")
                 .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
                 .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet2.xsl");
 
-        // 3. http://localhost:1234/api/camel/booksStartWithA
-        rest("/api/camel").get("/booksStartWithA")
+        // 3. http://localhost:1234/api/camer/cars/{CarBrand}/{consumption}
+        rest("/api/camel").get("cars/{CarBrand}/{consumption}")
                 .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
                 .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet3.xsl");
 
-        // 4. http://localhost:1234/api/camel/booksContainsWord/Arta
-        rest("/api/camel").get("/booksContainsWord/{word}")
+        // 4. http://localhost:1234/api/camel/carModelStartsWith/{string}
+        rest("/api/camel").get("/carModelStartsWith/{string}")
                 .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
                 .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet4.xsl");
 
-        // 5. http://localhost:1234/api/camel/chapterNumber
-        rest("/api/camel").get("/chapterNumber")
+        // 5. http://localhost:1234/api/camel/clients
+        rest("/api/camel").get("/clients")
                 .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
                 .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet5.xsl");
 
-        // 6. http://localhost:1234/api/camel/authorName/Jeff%20Keller
-        rest("/api/camel").get("/authorName/{name}")
+        // 6. http://localhost:1234/api/camel/discounts
+        rest("/api/camel").get("/discounts")
                 .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
                 .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet6.xsl");
 
 
-        rest("/api/camel").get("/books/{bookId}")
-                .produces(TEXT_XML)
+        // 7. http://localhost:1234/api/camel/carsByLowerPrice/{lowerPrice}
+        rest("/api/camel").get("/carsByLowerPrice/{lowerPrice}")
+                .produces(TEXT_HTML)
                 .route()
                 .process(PROCESSOR)
                 .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet7.xsl");
-
-//        rest("/books").get("/{bookId}")
-//                .produces("text/xml")
-//                .route()
-//                .process(PROCESSOR)
-//                .transform().xquery("resource:classpath:myxquery.txt", String.class);
-//                .to("xslt:file:C:\\\\Users\\\\marin\\\\Projects\\\\xml\\\\xmlProject\\\\src\\\\main\\\\java\\\\com\\\\library_project\\\\booksById.xsl");
     }
 }

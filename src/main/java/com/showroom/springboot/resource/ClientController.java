@@ -7,9 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +18,7 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
-    @ApiOperation(value = "Returns clients list")
+    @ApiOperation(value = "Returns car list")
     @ApiResponses(
             value = {
                     @ApiResponse(code = 100, message = "100 is the message"),
@@ -29,7 +27,7 @@ public class ClientController {
     )
     @GetMapping("/clients")
     public List<Client> getClients() {
-        return ClientService.getClientList();
+        return clientService.getClientList();
     }
 }
 

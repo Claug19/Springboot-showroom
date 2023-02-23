@@ -321,7 +321,7 @@ function fire_ajax_create_reserved_car_submit() {
     });
 }
 
-function fire_ajax_delete_booked_book_submit() {
+function fire_ajax_delete_reserved_car_submit() {
 
     var search = {}
     search["deletedReservedCar"] = $("#deletedReservedCar").val();

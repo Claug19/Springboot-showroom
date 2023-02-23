@@ -39,7 +39,7 @@ public class Utils {
         @Override
         public void configure() throws Exception {
             from("direct:start")
-                    .to("xslt:file:" + PROJECT_FOLDER + "\\replace_xsl_library.xsl")
+                    .to("xslt:file:" + Utils.PROJECT_FOLDER + "\\requestStylesheet.xsl")
                     .to("stream:out");
         }
     }

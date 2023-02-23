@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!-- Describes information in a car dealer showroom -->
-<Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:noNamespaceSchemaLocation="showroom.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Describes information in a car dealer showroom --><Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="showroom.xsd">
     <!-- clients -->
     <Clients>
-        <Client id="1" familyId="022" gender="male">
+        <Client familyId="022" gender="male" id="1">
             <firstName>John</firstName>
             <lastName>Johnson</lastName>
             <preferredCar>Opel</preferredCar>
@@ -12,26 +9,26 @@
             <filter>SUV</filter>
             <currency>euro</currency>
         </Client>
-        <Client id="2" familyId="050" gender="male">
+        <Client familyId="050" gender="male" id="2">
             <firstName>Gordon</firstName>
             <lastName>Ramsay</lastName>
             <preferredCar>Mercedes</preferredCar>
             <currency>euro</currency>
         </Client>
-        <Client id="3" familyId="022" gender="female">
+        <Client familyId="022" gender="female" id="3">
             <firstName>Mary</firstName>
             <lastName>Johnson</lastName>
             <preferredCar>Audi</preferredCar>
             <currency>euro</currency>
         </Client>
-        <Client id="4" familyId="003" gender="male">
+        <Client familyId="003" gender="male" id="4">
             <firstName>Walter</firstName>
             <lastName>White</lastName>
             <preferredCar>Audi</preferredCar>
             <preferredCar>Mercedes</preferredCar>
             <currency>euro</currency>
         </Client>
-        <Client id="5" familyId="025" gender="male">
+        <Client familyId="025" gender="male" id="5">
             <firstName>Gunar</firstName>
             <lastName>Ferguson</lastName>
             <preferredCar>Volvo</preferredCar>
@@ -40,13 +37,13 @@
             <filter>test</filter>
             <currency>euro</currency>
         </Client>
-        <Client id="6" familyId="030" gender="male">
+        <Client familyId="030" gender="male" id="6">
             <firstName>Wilhelm</firstName>
             <lastName>Johnson</lastName>
             <preferredCar>Seat</preferredCar>
             <currency>euro</currency>
         </Client>
-        <Client id="7" familyId="030" gender="female">
+        <Client familyId="030" gender="female" id="7">
             <firstName>Ann</firstName>
             <lastName>Johnson</lastName>
             <preferredCar>Seat</preferredCar>
@@ -106,6 +103,18 @@
                 <feature>Heated seat</feature>
             </features>
         </Car>
+        <Car carId="303">
+            <carBrand>Seat</carBrand>
+            <model>Leon</model>
+            <type>sedan</type>
+            <consumption>Diesel</consumption>
+            <year>2010</year>
+            <price currency="dollar">5000</price>
+            <features>
+                <feature>Airbag</feature>
+                <feature>Heated seat</feature>
+            </features>
+        </Car>
     </AvailableCars>
 
     <!-- Reserved cars-->
@@ -114,5 +123,5 @@
             <clientId>1</clientId>
             <carId>302</carId>
         </ReservedCar>
-    </ReservedCars>
+   </ReservedCars>
 </Data>

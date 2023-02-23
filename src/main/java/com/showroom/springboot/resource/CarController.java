@@ -1,6 +1,5 @@
 package com.showroom.springboot.resource;
 
-import com.showroom.springboot.model.Car;
 import com.showroom.springboot.model.*;
 import com.showroom.springboot.services.CarService;
 import io.swagger.annotations.Api;

@@ -8,10 +8,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 @SpringBootApplication
 public class SpringbootShowroomApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		SpringApplication.run(SpringbootShowroomApplication.class, args);
-		ApplicationContext configuration = new ClassPathXmlApplicationContext("config.xml");
-		ApplicationManager applicationManager = (ApplicationManager) configuration.getBean("ApplicationManagerBean");
+		ApplicationContext context = new ClassPathXmlApplicationContext("Config.xml");
+		ApplicationManager applicationManager = (ApplicationManager) context.getBean("ApplicationManagerBean");
 		applicationManager.start();
 	}
 

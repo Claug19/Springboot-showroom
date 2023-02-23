@@ -28,14 +28,14 @@ public class DataUtils {
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(Utils.RESOURCES_FOLDER + "\\user.xml");
-            NodeList books = doc.getElementsByTagName("user_data");
-            for (int i = 0; i < books.getLength(); i++) {
-                Node node = books.item(i);
-                Element book = (Element) node;
-                String id = book.getAttribute("id");
-                String name = book.getElementsByTagName("user_name").item(0).getFirstChild().getNodeValue();
-                String pass = book.getElementsByTagName("user_password").item(0).getFirstChild().getNodeValue();
-                String email = book.getElementsByTagName("user_email").item(0).getFirstChild().getNodeValue();
+            NodeList usersX = doc.getElementsByTagName("user_data");
+            for (int i = 0; i < usersX.getLength(); i++) {
+                Node node = usersX.item(i);
+                Element userX = (Element) node;
+                String id = userX.getAttribute("id");
+                String name = userX.getElementsByTagName("user_name").item(0).getFirstChild().getNodeValue();
+                String pass = userX.getElementsByTagName("user_password").item(0).getFirstChild().getNodeValue();
+                String email = userX.getElementsByTagName("user_email").item(0).getFirstChild().getNodeValue();
 
                 User user = new User();
                 user.setUsername(name);
@@ -58,7 +58,7 @@ public class DataUtils {
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(Utils.RESOURCES_FOLDER + "\\user.xml");
-            NodeList books = doc.getElementsByTagName("user_data");
+            NodeList usersX = doc.getElementsByTagName("user_data");
 
             Element root = doc.getDocumentElement();
             NodeList rootElement = doc.getElementsByTagName("user_list");

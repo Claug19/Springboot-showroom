@@ -42,6 +42,7 @@ public class SearchController {
         this.discountService = discountService;
     }
 
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -99,7 +100,6 @@ public class SearchController {
 
         return ResponseEntity.ok(result);
     }
-
 
     @PostMapping("/api/search-car-that-start-with")
     public ResponseEntity<?> getSearchResultViaAjax2Response(@Valid @RequestBody SearchCriteria search, Errors errors) {
